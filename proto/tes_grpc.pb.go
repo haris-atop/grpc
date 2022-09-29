@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TesServiceClient interface {
-	Tes1(ctx context.Context, in *TesRequest, opts ...grpc.CallOption) (*TesResponse, error)
+	Tes1(ctx context.Context, in *TesRequest, opts ...grpc.CallOption) (*TesRequest, error)
 }
 
 type tesServiceClient struct {
@@ -33,8 +33,8 @@ func NewTesServiceClient(cc grpc.ClientConnInterface) TesServiceClient {
 	return &tesServiceClient{cc}
 }
 
-func (c *tesServiceClient) Tes1(ctx context.Context, in *TesRequest, opts ...grpc.CallOption) (*TesResponse, error) {
-	out := new(TesResponse)
+func (c *tesServiceClient) Tes1(ctx context.Context, in *TesRequest, opts ...grpc.CallOption) (*TesRequest, error) {
+	out := new(TesRequest)
 	err := c.cc.Invoke(ctx, "/tes.TesService/Tes1", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *tesServiceClient) Tes1(ctx context.Context, in *TesRequest, opts ...grp
 // All implementations must embed UnimplementedTesServiceServer
 // for forward compatibility
 type TesServiceServer interface {
-	Tes1(context.Context, *TesRequest) (*TesResponse, error)
+	Tes1(context.Context, *TesRequest) (*TesRequest, error)
 	mustEmbedUnimplementedTesServiceServer()
 }
 
@@ -54,7 +54,7 @@ type TesServiceServer interface {
 type UnimplementedTesServiceServer struct {
 }
 
-func (UnimplementedTesServiceServer) Tes1(context.Context, *TesRequest) (*TesResponse, error) {
+func (UnimplementedTesServiceServer) Tes1(context.Context, *TesRequest) (*TesRequest, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Tes1 not implemented")
 }
 func (UnimplementedTesServiceServer) mustEmbedUnimplementedTesServiceServer() {}

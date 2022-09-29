@@ -10,7 +10,7 @@ message TesResponse {
 }
 
 service TesService {
-    rpc Tes1(TesRequest) returns (TesResponse) {
+    rpc Tes1(TesRequest) returns (TesRequest) {
         option (google.api.http) = {
             post: "/v1/tes1"
             body: "*"

@@ -1,3 +1,5 @@
+// this is grpc gateway
+
 package main
 
 import (
@@ -18,10 +20,9 @@ type Server struct {
 	pb.TesServiceServer
 }
 
-func (s *Server) Tes1(ctx context.Context, req *pb.TesRequest) (*pb.TesResponse, error) {
-	return &pb.TesResponse{
-		Value: "euy",
-	}, nil
+func (s *Server) Tes1(ctx context.Context, req *pb.TesRequest) (*pb.TesRequest, error) {
+
+	return req, nil
 }
 func main() {
 	go func() {
